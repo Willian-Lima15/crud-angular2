@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesComponent implements OnInit {
 
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource:any [] = [];
+
   constructor() { }
 
   ngOnInit() {
