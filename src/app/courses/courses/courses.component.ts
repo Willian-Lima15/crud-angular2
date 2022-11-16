@@ -1,3 +1,5 @@
+import { CoursesService } from './../../core/services/courses.service';
+import { CoursesModel } from './../../shared/model/courses.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource:any [] = [];
+  displayedColumns: string[] = ['name', 'category'];
+  courses: CoursesModel[]=[]
 
-  constructor() { }
+  constructor(
+    private _coursesServices: CoursesService
+  ) { }
 
   ngOnInit() {
   }
