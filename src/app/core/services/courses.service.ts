@@ -20,5 +20,9 @@ export class CoursesService {
       tap(coursesList => console.log(coursesList))
     )
   }
+
+  save(course: CoursesModel){
+      return this._http.post<CoursesModel[]>(this.API, course)
+  }
 }
 

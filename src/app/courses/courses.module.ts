@@ -13,9 +13,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { CategoryPipe } from '../shared/pipes/category.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -30,7 +32,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatSnackBarModule
   ],
   declarations: [
     CoursesComponent,
