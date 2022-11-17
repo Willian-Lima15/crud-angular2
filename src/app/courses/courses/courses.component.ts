@@ -5,6 +5,7 @@ import { CoursesModel } from './../../shared/model/courses.model';
 import { Component, OnInit } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -13,12 +14,14 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CoursesComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'category'];
+  displayedColumns: string[] = ['name', 'category','actions'];
   courses$: Observable<CoursesModel[]>
 
   constructor(
     private _coursesServices: CoursesService,
-    public dialog: MatDialog
+    private router: Router,
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
   ) {
     this.courses$ = this._coursesServices.list()
     .pipe(
@@ -37,6 +40,10 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  onAdd() {
+    this.router.navigate(['form'],{relativeTo: this.route});
   }
 
 }
