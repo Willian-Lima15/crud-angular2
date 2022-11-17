@@ -8,7 +8,7 @@ import { CoursesModel } from 'src/app/shared/model/courses.model';
 })
 export class CoursesService {
 
-  private readonly API = '/assets/acourses.json'
+  private readonly API = 'http://localhost:3000/courses'
 
   constructor(private _http: HttpClient) { }
 
