@@ -2,13 +2,22 @@
   max-width: 80%;
   margin: 2em auto;
   text-align: center;
+} */
+
+.mat-table {
+  overflow: auto;
+  max-height: 600px;
 }
 
-table {
-  width: 100%;
+.action-column {
+  flex: 0 0 75px;
 }
 
-.spinner-class {
+.action-column-header {
+  flex: 0 0 55px;
+}
+
+/* .spinner-class {
   padding: 25px;
   background: rgba(0, 0, 0, 0.15);
   display: flex;
