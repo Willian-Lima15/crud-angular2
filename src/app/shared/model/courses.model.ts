@@ -1,5 +1,5 @@
 export interface CoursesModel {
-  id?:number;
+  id:string;
   name:string;
   category:string;
 }

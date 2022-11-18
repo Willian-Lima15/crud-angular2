@@ -46,4 +46,8 @@ export class CoursesComponent implements OnInit {
     this.router.navigate(['form'],{relativeTo: this.route});
   }
 
+  onDelete() {
+    //this._coursesServices.delete().subscribe()
+  }
+
 }

@@ -24,5 +24,15 @@ export class CoursesService {
   save(course: CoursesModel){
       return this._http.post<CoursesModel[]>(this.API, course)
   }
+
+  edit(courses:CoursesModel){
+    const url = `${this.API}/${courses.id}`
+    return this._http.put<CoursesModel[]>(url,courses)
+  }
+
+  delete(id: string) {
+    const url = `${this.API}/${id}`
+    return this._http.delete<CoursesModel[]>(url)
+  }
 }
 

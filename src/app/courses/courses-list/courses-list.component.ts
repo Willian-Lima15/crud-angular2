@@ -1,7 +1,6 @@
+import { CoursesService } from './../../core/services/courses.service';
 import { CoursesModel } from 'src/app/shared/model/courses.model';
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-courses-list',
@@ -12,18 +11,20 @@ export class CoursesListComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'category','actions'];
   @Input() courses: CoursesModel[] = []
+  @Output() add = new EventEmitter(false)
+  @Output() delete= new EventEmitter(false)
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    public dialog: MatDialog,
-  ) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
   onAdd() {
-    this.router.navigate(['form'],{relativeTo: this.route});
+    this.add.emit(true)
+  }
+
+  onDelete() {
+    this.delete.emit(true)
   }
 
 }
