@@ -1,3 +1,4 @@
+import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CourseFormComponent } from './course-form/course-form.component';
 import { ErrorDialogComponent } from './../shared/modal/error-dialog/error-dialog.component';
 import { NgModule } from '@angular/core';
@@ -40,6 +41,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     CoursesComponent,
     ErrorDialogComponent,
     CategoryPipe,
+    CoursesListComponent,
     CourseFormComponent
   ]
 })
