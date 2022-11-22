@@ -4,7 +4,12 @@
   </mat-toolbar>
 
   <div class="column-flex mat-elevation-z8">
-  <app-courses-list [courses]="courses" (add)="onAdd()" (delete)="onDelete()" *ngIf="courses$ |async as courses; else loading"
+  <app-courses-list
+  [courses]="courses"
+  (add)="onAdd()"
+  (edit)="onEdit($event)"
+  (delete)="onDelete()"
+  *ngIf="courses$ |async as courses; else loading"
   ></app-courses-list>
   <div >
 

@@ -18,7 +18,11 @@ export class CoursesService {
       first(),
       //delay(1000),
       tap(coursesList => console.log(coursesList))
-    )
+    );
+  }
+
+  loadById(id: string){
+    return this._http.get<CoursesModel>(`${this.API}/${id}`);
   }
 
   save(course: CoursesModel){

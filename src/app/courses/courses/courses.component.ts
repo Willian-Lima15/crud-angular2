@@ -43,7 +43,11 @@ export class CoursesComponent implements OnInit {
   }
 
   onAdd() {
-    this.router.navigate(['form'],{relativeTo: this.route});
+    this.router.navigate(['new'],{relativeTo: this.route});
+  }
+
+  onEdit(courses: CoursesModel) {
+    this.router.navigate(['edit', courses.id],{relativeTo: this.route});
   }
 
   onDelete() {
