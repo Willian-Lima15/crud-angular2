@@ -26,12 +26,18 @@ export class CoursesService {
   }
 
   save(course: CoursesModel){
-      return this._http.post<CoursesModel[]>(this.API, course)
+    if(course.id){ //Se course tive id vai pra update
+       return this.update(course);
+    }
+      return this.create(course);
   }
 
-  edit(courses:CoursesModel){
-    const url = `${this.API}/${courses.id}`
-    return this._http.put<CoursesModel[]>(url,courses)
+  private create(course: CoursesModel) {
+    return this._http.post<CoursesModel[]>(this.API, course).pipe(first());
+  }
+
+  private update(course: CoursesModel){
+    return this._http.put<CoursesModel[]>(`${this.API}/${course.id}`, course).pipe(first());
   }
 
   delete(id: string) {
