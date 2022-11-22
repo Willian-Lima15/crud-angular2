@@ -1,3 +1,5 @@
+import { CoursesModel } from './../../shared/model/courses.model';
+import { ActivatedRoute } from '@angular/router';
 import { CoursesService } from './../../core/services/courses.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -17,13 +19,21 @@ export class CourseFormComponent implements OnInit {
     private _fb: FormBuilder,
     private coursesService:CoursesService,
     private _snackBar: MatSnackBar,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.coursesForm = this._fb.group({
+      id: [''],
       name: [''],
       category: ['']
+    })
+    const course: CoursesModel = this.route.snapshot.data['course'];
+    this.coursesForm.setValue({
+      id: course.id,
+      name:course.name,
+      category: course.category
     })
   }
 
