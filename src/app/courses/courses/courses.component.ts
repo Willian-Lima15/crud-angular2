@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-courses',
@@ -15,27 +16,32 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CoursesComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'category','actions'];
-  courses$: Observable<CoursesModel[]>
+  courses$: Observable<CoursesModel[]> | null = null;
 
   constructor(
     private _coursesServices: CoursesService,
     private router: Router,
+    private _snackBar: MatSnackBar,
     private route: ActivatedRoute,
     public dialog: MatDialog,
   ) {
-    this.courses$ = this._coursesServices.list()
-    .pipe(
-      catchError(error => {
-        this.onError('Erro ao carregar cursos')
-        return of([])
-      })
-    );
+    this.refresh()
   }
 
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg
     });
+  }
+
+  refresh(){
+    this.courses$ = this._coursesServices.list()
+    .pipe(
+      catchError(() => {
+        this.onError('Erro ao carregar cursos')
+        return of([])
+      })
+    );
   }
 
   ngOnInit() {
@@ -50,8 +56,17 @@ export class CoursesComponent implements OnInit {
     this.router.navigate(['edit', courses.id],{relativeTo: this.route});
   }
 
-  onDelete() {
-    //this._coursesServices.delete().subscribe()
+  onDelete(courses: CoursesModel) {
+    this._coursesServices.delete(courses.id).subscribe(()=>{
+      this.refresh()
+      this._snackBar.open('Curso removido com sucesso!!','X',{
+        duration:5000,
+        verticalPosition:'top',
+        horizontalPosition:'center'
+      })
+    },
+    () => this.onError('Erro ao tentar remove cursos')
+    );
   }
 
 }

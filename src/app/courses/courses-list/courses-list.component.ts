@@ -28,8 +28,8 @@ export class CoursesListComponent implements OnInit {
     this.edit.emit(course)
   }
 
-  onDelete() {
-    this.delete.emit(true)
+  onDelete(course: CoursesModel) {
+    this.delete.emit(course)
   }
 
 }
