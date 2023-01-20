@@ -2,7 +2,7 @@ import { CoursesModel } from './../../shared/model/courses.model';
 import { ActivatedRoute } from '@angular/router';
 import { CoursesService } from './../../core/services/courses.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {Location} from '@angular/common'
 
@@ -26,8 +26,8 @@ export class CourseFormComponent implements OnInit {
   ngOnInit() {
     this.coursesForm = this._fb.group({
       id: [''],
-      name: [''],
-      category: ['']
+      name: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
+      category: ['',[Validators.required]]
     })
     const course: CoursesModel = this.route.snapshot.data['course'];
     this.coursesForm.setValue({
@@ -53,6 +53,26 @@ export class CourseFormComponent implements OnInit {
 
   private onError(){
     this._snackBar.open('erro','',{duration:5000});
+  }
+
+  getErrorMessage(fildName:string) {
+    const field = this.coursesForm.get(fildName);
+
+    if(field?.hasError('required')){
+      return 'Campo obrigatório';
+    }
+
+    if(field?.hasError('minLength')){
+      const requiredLength = field.errors ? field.errors['minLength']['requiredLength'] : 5;
+      return `Tamanho minimo precisa ser de ${requiredLength} caracters.`
+    }
+
+    if(field?.hasError('maxLength')){
+      const requiredLength = field.errors ? field.errors['mxLength']['requiredLength'] : 30;
+      return `Tamanho máximo precisa ser de ${requiredLength} caracters.`
+    }
+
+    return 'Campo Inválido';
   }
 
 }
