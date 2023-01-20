@@ -2,8 +2,8 @@
   "courses": [
     {
       "id": "1",
-      "name": "Angular",
-      "category": "Front-end"
+      "name": "Angular 15",
+      "category": "front-end"
     },
     {
       "id": "2",
@@ -19,6 +19,11 @@
       "name": "Java",
       "category": "back-end",
       "id": "_uS8FE2"
+    },
+    {
+      "id": "SUzBsNN",
+      "name": "C#",
+      "category": "Back-end"
     }
   ]
 }
