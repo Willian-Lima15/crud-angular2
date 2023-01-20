@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CategoryPipe } from '../shared/pipes/category.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ConfirmationDialogComponent } from '../shared/modal/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   declarations: [
     CoursesComponent,
     ErrorDialogComponent,
+    ConfirmationDialogComponent,
     CategoryPipe,
     CoursesListComponent,
     CourseFormComponent

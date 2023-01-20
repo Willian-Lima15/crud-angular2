@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmationDialogComponent } from 'src/app/shared/modal/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-courses',
@@ -57,16 +58,23 @@ export class CoursesComponent implements OnInit {
   }
 
   onDelete(courses: CoursesModel) {
-    this._coursesServices.delete(courses.id).subscribe(()=>{
-      this.refresh()
-      this._snackBar.open('Curso removido com sucesso!!','X',{
-        duration:5000,
-        verticalPosition:'top',
-        horizontalPosition:'center'
-      })
-    },
-    () => this.onError('Erro ao tentar remove cursos')
-    );
-  }
-
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        data: 'Tem certeza que deseja remover o curso?',
+      });
+  
+      dialogRef.afterClosed().subscribe((result:boolean) => {
+        if(result){
+          this._coursesServices.delete(courses.id).subscribe(()=>{
+            this.refresh()
+            this._snackBar.open('Curso removido com sucesso!!','X',{
+              duration:5000,
+              verticalPosition:'top',
+              horizontalPosition:'center'
+            })
+          },
+          () => this.onError('Erro ao tentar remove cursos')
+          );
+        }
+      });
+    }
 }
